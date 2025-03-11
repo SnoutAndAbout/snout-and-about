@@ -2,12 +2,12 @@
   "name": "snout-and-about",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "seed": "node ./db/seed.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
