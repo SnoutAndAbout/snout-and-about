@@ -12,12 +12,13 @@ const createUser = async(username, password, name) => {
       RETURNING *;
     `);
     const createdUser = rows[0];
-    if (createdUser) {
-      const registerToken = await jwt.sign({id: createdUser.id}, process.env.SECRET);
-      return registerToken;
-    } else {
-      throw new Error('Error created user.');
-    }
+    return createdUser;
+    // if (createdUser) {
+    //   const registerToken = await jwt.sign({id: createdUser.id}, process.env.SECRET);
+    //   return registerToken;
+    // } else {
+    //   throw new Error('Error creating user.');
+    // }
   } catch (error) {
    throw new Error(error);
   }
@@ -33,7 +34,6 @@ const loginUser = async (inputUser, inputPassword) => {
       const isPasswordValid = await bcrypt.compare(inputPassword, userCheck.password);
       if (isPasswordValid) {
         const token = await jwt.sign({ id: userCheck.id }, process.env.SECRET);
-
         return token;
       }
     } else {
