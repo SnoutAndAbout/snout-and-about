@@ -75,6 +75,7 @@ const seeder = async() => {
   const event1 = await createEvent('11/03/2025','First day of coding.','New York City, New York','Lets get this baby started!',user1.id);
   const event2 = await createEvent('11/04/2025','Second day of coding.','New York City, New York','we are started!',user2.id);
   const event3 = await createEvent('11/05/2025','Third day of coding.','New York City, New York','starting the started!',user3.id);
+
   console.log('Event Created!');
 
   console.log('updating calendar')
