@@ -1,22 +1,31 @@
 const client = require('./client.js');
+const { updateCalendar } = require('./calendar.js');
 
 
 const createEvent = async( date, name, description, location, creatorId, picture=null) => {
   try {
     if(picture){
+      console.log('where')
       const { rows } = await client.query(`
         INSERT INTO events (date,name,description,location,picture,creator_id)
-        VALUES ('${date}','${name}','${description}','${location}','${picture}','${creatorId}')
+        VALUES ('${date}','${name}','${description}','${location}','${picture}',${creatorId})
         RETURNING *;
       `);
-      return rows[0];
+      console.log('here')
+      const event = rows[0];
+      await updateCalendar( event.id, event.creator_id);
+      return event;
     }else{
+      console.log('there')
       const { rows } = await client.query(`
         INSERT INTO events (date,name,description,location,creator_id)
-        VALUES ('${date}','${name}','${description}','${location}','${creatorId}')
+        VALUES ('${date}','${name}','${description}','${location}',${creatorId})
         RETURNING *;
       `);
-      return rows[0];
+      console.log('chere')
+      const event = rows[0];
+      await updateCalendar( event.id, event.creator_id);
+      return event;
     }
   } catch (error) {
     throw new Error(error);
@@ -34,6 +43,17 @@ const fetchEvents = async() => {
   }
 }
 
+const viewEvent = async(eventId) => {
+  try {
+    const {rows} = await client.query(`
+      SELECT * FROM events WHERE id=${eventId};
+    `);
+    return rows[0];
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
 const localEvents = async(location) => {
   try {
     const {rows} = await client.query(`
@@ -48,6 +68,7 @@ const localEvents = async(location) => {
 const deleteEvent = async(eventId) => {
   try {
     await client.query(`
+      DELETE FROM calendar WHERE event_id=${eventId};
       DELETE FROM events WHERE id=${eventId};
     `);
   } catch (error) {
@@ -59,5 +80,6 @@ module.exports = {
   createEvent,
   deleteEvent,
   fetchEvents,
-  localEvents
+  localEvents,
+  viewEvent
 }

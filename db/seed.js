@@ -70,7 +70,7 @@ const seeder = async() => {
   console.log('Logged in!')
 
   console.log('Creating the first event...')
-  const event1 = await createEvent('11/03/2025','First day of coding.','New York City, New York','Lets get this baby started!',user1.id);
+  const event1 = await createEvent('11/03/2025','First day of coding.','New York City, New York','Lets get this baby started!', user1.id);
   console.log('Event Created!');
   
   console.log('Deleting the event...');

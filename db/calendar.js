@@ -1,14 +1,24 @@
 const client = require('./client.js');
 
 
-const updateCalendar = async( eventId, userId ) => {
+const updateCalendar = async( eventName, eventId, userId ) => {
   try {
     const { rows } = await client.query(`
-      INSERT INTO calendar ( event_id, user_id )
-      VALUES (${eventId}, ${userId})
+      INSERT INTO calendar ( event_name, event_id, user_id )
+      VALUES ('${eventName}', ${eventId} , ${userId} )
       RETURNING *;
     `);
     return rows[0];
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+const myCalendar = async( userId ) => {
+  try {
+    const { rows } = await client.query(`
+      SELECT * FROM calendar WHERE user_id=${userId};
+    `);
   } catch (error) {
     throw new Error(error);
   }
@@ -26,5 +36,6 @@ const cancelEvent = async( eventId, userId ) => {
 
 module.exports = {
   updateCalendar,
-  cancelEvent
+  cancelEvent,
+  myCalendar
 }
