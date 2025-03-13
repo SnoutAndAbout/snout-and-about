@@ -39,8 +39,7 @@ const createTables = async() => {
         id SERIAL PRIMARY KEY,
         event_name VARCHAR(50) NOT NULL,
         event_id INT NOT NULL REFERENCES events(id),
-        user_id INT NOT NULL REFERENCES users(id),
-        event_name VARCHAR(50) NOT NULL
+        user_id INT NOT NULL REFERENCES users(id)
       );
     `);
   } catch (error) {
@@ -73,16 +72,15 @@ const seeder = async() => {
   console.log('Logged in!')
 
   console.log('Creating an event...')
-  const event1 = await createEvent('11/03/2025','First day of coding.','New York City, New York','Lets get this baby started!',user1.id);
-  const event2 = await createEvent('11/04/2025','Second day of coding.','New York City, New York','we are started!',user2.id);
-  const event3 = await createEvent('11/05/2025','Third day of coding.','New York City, New York','starting the started!',user3.id);
-
+  const event1 = await createEvent('11/03/2025','First day of coding.','New York City, New York','Lets get this baby started!',1);
+  const event2 = await createEvent('11/04/2025','Second day of coding.','New York City, New York','we are started!',2);
+  const event3 = await createEvent('11/05/2025','Third day of coding.','New York City, New York','starting the started!',3);
   console.log('Event Created!');
 
   console.log('updating calendar')
-  const calendar1 = await updateCalendar("Kevins calendar", event1.id, user1.id)
-  const calendar2 = await updateCalendar("jerrys calendar", event2.id, user2.id)
-  const calendar3 = await updateCalendar("marks calendar", event3.id, user3.id)
+  const calendar1 = await updateCalendar("Kevins calendar", event1.id, 1)
+  const calendar2 = await updateCalendar("jerrys calendar", event2.id, 2)
+  const calendar3 = await updateCalendar("marks calendar", event3.id, 3)
   console.log('calendar updated')
 
   console.log('Ending session...')
