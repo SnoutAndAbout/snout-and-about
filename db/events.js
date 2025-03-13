@@ -5,26 +5,22 @@ const { updateCalendar } = require('./calendar.js');
 const createEvent = async( date, name, description, location, creatorId, picture=null) => {
   try {
     if(picture){
-      console.log('where')
       const { rows } = await client.query(`
         INSERT INTO events (date,name,description,location,picture,creator_id)
         VALUES ('${date}','${name}','${description}','${location}','${picture}',${creatorId})
         RETURNING *;
       `);
-      console.log('here')
       const event = rows[0];
       await updateCalendar( event.id, event.creator_id);
       return event;
     }else{
-      console.log('there')
       const { rows } = await client.query(`
         INSERT INTO events (date,name,description,location,creator_id)
         VALUES ('${date}','${name}','${description}','${location}',${creatorId})
         RETURNING *;
       `);
-      console.log('chere')
       const event = rows[0];
-      await updateCalendar( event.id, event.creator_id);
+      await updateCalendar( event.name, event.id, event.creator_id);
       return event;
     }
   } catch (error) {

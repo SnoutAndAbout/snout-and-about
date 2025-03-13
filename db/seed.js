@@ -39,7 +39,8 @@ const createTables = async() => {
         id SERIAL PRIMARY KEY,
         event_name VARCHAR(50) NOT NULL,
         event_id INT NOT NULL REFERENCES events(id),
-        user_id INT NOT NULL REFERENCES users(id)
+        user_id INT NOT NULL REFERENCES users(id),
+        event_name VARCHAR(50) NOT NULL
       );
     `);
   } catch (error) {
@@ -68,7 +69,7 @@ const seeder = async() => {
   console.log('Users Created!')
 
   console.log('Loggin in...');
-  await loginUser(user1.username,'testtest');
+  await loginUser('user1','testtest');
   console.log('Logged in!')
 
   console.log('Creating an event...')
