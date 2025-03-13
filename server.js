@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 //GET ALL EVENTS/
 app.get('/api/events', async(req,res) => {
   try {
-    const events = fetchEvents();
+    const events = await fetchEvents();
     res.send(events);
   } catch (error) {
     res.send(error.message)
@@ -31,7 +31,7 @@ app.get('/api/events', async(req,res) => {
 app.get('/api/events/:region', async(req,res) => {
   const { region } = req.params;
   try {
-    const events = localEvents(region);
+    const events = await localEvents(region);
     res.send(events);
   } catch (error) {
     res.send(error.message);
@@ -41,7 +41,7 @@ app.get('/api/events/:region', async(req,res) => {
 app.get('/api/calendar/:userId', async(req,res) => {
   const { userId } = req.params;
   try {
-    const events = myCalendar(userId);
+    const events = await myCalendar(userId);
     res.send(events);
   } catch (error) {
     res.send(error.message);
