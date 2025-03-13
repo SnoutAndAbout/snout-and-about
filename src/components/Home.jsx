@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div>
       {/* Navbar */}
-      <nav>
+      {/* <nav>
         <h1>Snout And About</h1>
         <ul>
           <li><Link to="/map">Map</Link></li>
@@ -15,7 +15,7 @@ const Home = () => {
           <li><Link to="/events">Events</Link></li>
           <li><Link to="/login">Signup / Sign in</Link></li>
         </ul>
-      </nav>
+      </nav> */}
 
       {/* Home Page Content */}
       <main>
