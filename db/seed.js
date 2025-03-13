@@ -72,9 +72,9 @@ const seeder = async() => {
   console.log('Logged in!')
 
   console.log('Creating an event...')
-  const event1 = await createEvent('11/03/2025','First day of coding.','New York City, New York','Lets get this baby started!',1);
-  const event2 = await createEvent('11/04/2025','Second day of coding.','New York City, New York','we are started!',2);
-  const event3 = await createEvent('11/05/2025','Third day of coding.','New York City, New York','starting the started!',3);
+  const event1 = await createEvent('11/03/2025','First day of coding.','Lets get this baby started!','New York City, New York',1);
+  const event2 = await createEvent('11/04/2025','Second day of coding.','we are started!', 'Joliet, Illinois',2);
+  const event3 = await createEvent('11/05/2025','Third day of coding.','starting the started!', 'Phoenix, Arizona',3);
   console.log('Event Created!');
 
   console.log('updating calendar')
