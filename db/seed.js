@@ -37,7 +37,8 @@ const createTables = async() => {
       CREATE TABLE calendar (
         id SERIAL PRIMARY KEY,
         event_id INT NOT NULL REFERENCES events(id),
-        user_id INT NOT NULL REFERENCES users(id)
+        user_id INT NOT NULL REFERENCES users(id),
+        event_name VARCHAR(50) NOT NULL
       );
     `);
   } catch (error) {
@@ -66,11 +67,11 @@ const seeder = async() => {
   console.log('Users Created!')
 
   console.log('Loggin in...');
-  await loginUser(user1.username,'testtest');
+  await loginUser('user1','testtest');
   console.log('Logged in!')
 
   console.log('Creating the first event...')
-  const event1 = await createEvent('11/03/2025','First day of coding.','New York City, New York','Lets get this baby started!', user1.id);
+  const event1 = await createEvent('11/03/2025','First day of coding.','Lets get this baby started!','New York City, New York', 1);
   console.log('Event Created!');
   
   console.log('Deleting the event...');
