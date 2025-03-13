@@ -67,7 +67,7 @@ const whereEvents = async() => {
     const {rows} = await client.query(`
       SELECT DISTINCT location FROM events;
     `);
-    return rows;
+    return rows.map((x)=>x.location);
   } catch (error) {
     throw new Error(error)
   }

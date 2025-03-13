@@ -1,5 +1,5 @@
 const { createUser, loginUser, validateUser} = require('./db/users.js');
-const { fetchEvents, localEvents, createEvent, deleteEvent } = require('./db/events.js');
+const { fetchEvents, localEvents, createEvent, deleteEvent, viewEvent, whereEvents } = require('./db/events.js');
 const { updateCalendar, cancelEvent , myCalendar } = require('./db/calendar.js')
 
 
@@ -47,7 +47,15 @@ app.get('/api/calendar/:userId', async(req,res) => {
     res.send(error.message);
   }
 })
-
+//GET CITIES WITH EVENTS//
+app.get('/api/cities', async(req,res) => {
+  try {
+    const cities = await whereEvents();
+    res.send(cities);
+  } catch (error) {
+    throw new Error(error);
+  }
+})
 
 
 //     POST Requests      //
@@ -89,6 +97,28 @@ app.post('/api/events', async(req,res,next) => {
   }
 })
 
+
+//    PUT REQUESTS    //
+//Add event to calendar//
+app.put('/api/calendar', async(req,res,next) => {
+  try {
+    const { eventId } = req.body;
+    const { token } = req.headers;
+    const userData = await validateUser(token);
+    const event = await viewEvent(eventId);
+    if(userData){
+      await updateCalendar(event.name, eventId, userData.id);
+      res.status(201).send('Event Added');
+    }else{
+      throw new Error('Bad Token');
+    }
+       
+  } catch (error) {
+    console.log(error);
+  }
+})
+
+
 //      DELETE REQUESTS      //
 //DELETE EVENT//
 app.delete('/api/events', async(req,res,next) => {
@@ -106,6 +136,8 @@ app.delete('/api/events', async(req,res,next) => {
     console.log(error);
   }
 })
+
+
 
 app.listen(process.env.PORT, () => {
   console.log(`listening on PORT ${process.env.PORT}`);

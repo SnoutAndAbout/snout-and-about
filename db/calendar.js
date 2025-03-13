@@ -20,6 +20,7 @@ const myCalendar = async( userId ) => {
     const { rows } = await client.query(`
       SELECT * FROM calendar WHERE user_id=${userId};
     `);
+    return rows;
   } catch (error) {
     throw new Error(error);
   }
