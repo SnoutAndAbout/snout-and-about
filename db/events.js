@@ -33,6 +33,7 @@ const fetchEvents = async() => {
     const {rows} = await client.query(`
       SELECT * FROM events;
     `);
+    console.log(rows);
     return rows;
   } catch (error) {
     throw new Error(error)
@@ -61,6 +62,17 @@ const localEvents = async(location) => {
   }
 }
 
+const whereEvents = async() => {
+  try {
+    const {rows} = await client.query(`
+      SELECT DISTINCT location FROM events;
+    `);
+    return rows;
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 const deleteEvent = async(eventId) => {
   try {
     await client.query(`
@@ -77,5 +89,6 @@ module.exports = {
   deleteEvent,
   fetchEvents,
   localEvents,
-  viewEvent
+  viewEvent,
+  whereEvents
 }
