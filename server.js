@@ -7,17 +7,18 @@ const client = require('./db/client.js');
 client.connect();
 
 const express = require('express');
+const path = require('path');
 const cors = require('cors');
 const app = express();
+
+//MIDDLEWARE
+
+app.use(express.static(path.join(__dirname, `dist`)));
 app.use(express.json());
 app.use(cors());
 
 
 //      GET REQUESTS      //
-//DEFAULT//
-app.get('/', (req, res) => {
-  res.send('Welcome to Snout and About!');
-})
 //GET ALL EVENTS/
 app.get('/api/events', async(req,res) => {
   try {
@@ -56,7 +57,10 @@ app.get('/api/cities', async(req,res) => {
     throw new Error(error);
   }
 })
-
+//DEFAULT//
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, `dist`, ‘index.html’));
+});
 
 //     POST Requests      //
 //USER LOGIN 
