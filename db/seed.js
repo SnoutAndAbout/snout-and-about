@@ -25,6 +25,12 @@ const createTables = async() => {
         name VARCHAR(30)
       );
 
+      CREATE TABLE cities (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(30) UNIQUE NOT NULL,
+        state VARCHAR(30) NOT NULL
+      );
+
       CREATE TABLE events (
         id SERIAL PRIMARY KEY,
         date DATE NOT NULL,
