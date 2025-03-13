@@ -33,7 +33,6 @@ const fetchEvents = async() => {
     const {rows} = await client.query(`
       SELECT * FROM events;
     `);
-    console.log(rows);
     return rows;
   } catch (error) {
     throw new Error(error)
