@@ -1,7 +1,14 @@
+form{
+  display: flex;
+  flex-direction: column;
+
+  
+}
 .Navbar-container {
   text-align: center;
   padding: 20px;
 }
+
 
 
 nav {
