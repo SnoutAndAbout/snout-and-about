@@ -59,7 +59,7 @@ app.get('/api/cities', async(req,res) => {
 })
 //DEFAULT//
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, `dist`, 'index.html'));
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 //     POST Requests      //
