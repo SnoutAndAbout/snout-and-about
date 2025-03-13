@@ -1,6 +1,7 @@
 const client = require('./client.js');
 const { createUser, loginUser, validateUser} = require('./users.js');
 const { fetchEvents, localEvents, createEvent, deleteEvent } = require('./events.js');
+const { updateCalendar } = require('./calendar.js')
 
 const dropTables = async() => {
   try {
@@ -36,6 +37,7 @@ const createTables = async() => {
 
       CREATE TABLE calendar (
         id SERIAL PRIMARY KEY,
+        event_name VARCHAR(50) NOT NULL,
         event_id INT NOT NULL REFERENCES events(id),
         user_id INT NOT NULL REFERENCES users(id),
         event_name VARCHAR(50) NOT NULL
@@ -70,13 +72,18 @@ const seeder = async() => {
   await loginUser('user1','testtest');
   console.log('Logged in!')
 
-  console.log('Creating the first event...')
-  const event1 = await createEvent('11/03/2025','First day of coding.','Lets get this baby started!','New York City, New York', 1);
+  console.log('Creating an event...')
+  const event1 = await createEvent('11/03/2025','First day of coding.','New York City, New York','Lets get this baby started!',user1.id);
+  const event2 = await createEvent('11/04/2025','Second day of coding.','New York City, New York','we are started!',user2.id);
+  const event3 = await createEvent('11/05/2025','Third day of coding.','New York City, New York','starting the started!',user3.id);
+
   console.log('Event Created!');
-  
-  console.log('Deleting the event...');
-  await deleteEvent(event1.id);
-  console.log('Event Deleted');
+
+  console.log('updating calendar')
+  const calendar1 = await updateCalendar("Kevins calendar", event1.id, user1.id)
+  const calendar2 = await updateCalendar("jerrys calendar", event2.id, user2.id)
+  const calendar3 = await updateCalendar("marks calendar", event3.id, user3.id)
+  console.log('calendar updated')
 
   console.log('Ending session...')
   await client.end();
