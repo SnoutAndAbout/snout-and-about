@@ -1,22 +1,26 @@
 const client = require('./client.js');
 const { updateCalendar } = require('./calendar.js');
+const { cityCheck } = require('./cities.js');
 
 
+//CREATES A NEW EVENT, A PICTURE ENTRY IS NOT REQUIRED
 const createEvent = async( date, name, description, location, creatorId, picture=null) => {
   try {
     if(picture){
+      const locId = await cityCheck(location);
       const { rows } = await client.query(`
         INSERT INTO events (date,name,description,location,picture,creator_id)
-        VALUES ('${date}','${name}','${description}','${location}','${picture}',${creatorId})
+        VALUES ('${date}','${name}','${description}','${locId}','${picture}',${creatorId})
         RETURNING *;
       `);
       const event = rows[0];
       await updateCalendar( event.id, event.creator_id);
       return event;
     }else{
+      const locId = await cityCheck(location);
       const { rows } = await client.query(`
         INSERT INTO events (date,name,description,location,creator_id)
-        VALUES ('${date}','${name}','${description}','${location}',${creatorId})
+        VALUES ('${date}','${name}','${description}','${locId}',${creatorId})
         RETURNING *;
       `);
       const event = rows[0];
@@ -28,6 +32,7 @@ const createEvent = async( date, name, description, location, creatorId, picture
   }
 }
 
+//RETURNS THE ROW OF EVERY EVENT IN OUR DATABASE
 const fetchEvents = async() => {
   try {
     const {rows} = await client.query(`
@@ -39,6 +44,7 @@ const fetchEvents = async() => {
   }
 }
 
+//RETURNS ROW DATA FOR SPECIFIED EVENT ID
 const viewEvent = async(eventId) => {
   try {
     const {rows} = await client.query(`
@@ -50,6 +56,7 @@ const viewEvent = async(eventId) => {
   }
 }
 
+//RETURNS THE ROWS FOR EVENTS WITH THE SPECIFED LOCATION ID NUMBER
 const localEvents = async(location) => {
   try {
     const {rows} = await client.query(`
@@ -61,16 +68,6 @@ const localEvents = async(location) => {
   }
 }
 
-const whereEvents = async() => {
-  try {
-    const {rows} = await client.query(`
-      SELECT DISTINCT location FROM events;
-    `);
-    return rows.map((x)=>x.location);
-  } catch (error) {
-    throw new Error(error)
-  }
-}
 
 const deleteEvent = async(eventId) => {
   try {
@@ -89,5 +86,4 @@ module.exports = {
   fetchEvents,
   localEvents,
   viewEvent,
-  whereEvents
 }

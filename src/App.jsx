@@ -12,7 +12,7 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/city/:cityName" element={<City/>}/>
+        <Route path="/city/:cityId" element={<City/>}/>
         <Route path="/registration" element={<Registration/>}/>
         <Route path="/account" element={<Account/>}/>
       </Routes>

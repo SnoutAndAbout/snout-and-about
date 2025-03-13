@@ -54,5 +54,75 @@ const stateDict = [
 ];
 
 const cityCheck = async( cityName ) => {
-  
+  try {
+    const {city,state} = cityName.split(',').map((x)=>{x.trim()});
+    let stateName = state;
+    //PARSING THE STATE NAME TO THE PROPER VALUE
+    for (state in stateDict){
+      if(stateDict[state].aliases.map((x)=>{x.toLowerCase()}).includes(stateName.toLowerCase())){
+        stateName = stateDict[state].name
+      }
+    }
+    const {rows} = await client.query(`
+      SELECT * FROM cities;
+    `);
+    //CHECKING TO SEE IF OUR CITY IS ALREADY IN THE TABLE
+    for (row in rows) {
+      if((row.name.replace(/ /g,'').toLowerCase()==city.replace(/ /g,'').toLowerCase()) && (row.state==stateName)){
+        return row.id;
+      }
+    }
+    //CREATES A NEW CITY ENTRY AND RETURNS ITS ID
+    const newCityId = await addCity(city,stateName);
+    return newCityId;
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+
+//ADDS A NEW CITY TO THE CITY TABLE
+const addCity = async( cityName, stateName ) => {
+  //MAKES SURE THE CITY NAME IS FORTMATTED WELL WITH SPACES AND CAPITAL LETTERS
+  const parsedName = cityName.split(' ').map((word) => { word[0].toUpperCase()+word.slice(1).toLowerCase()}).join(' ');
+  try {
+    const {rows} = await client.query(`
+      INSERT INTO cities ( name, state)
+      VALUES (${parsedName}, ${stateName})
+      RETURNING *;
+    `);
+      return rows[0].id;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+//RETURNS ALL THE CITIES 
+const fetchCities = async() => {
+  try {
+    const { rows } = await client.query(`
+      SELECT * FROM cities;
+    `);
+    return rows;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+//FETCHES THE NAME OF A CITY WITH A GIVEN ID
+const cityName = async(id) => {
+  try {
+    const { rows } = await client.query(`
+      SELECT * FROM cities WHERE id=${id};
+    `);
+    return rows[0];
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+module.exports = {
+  cityCheck,
+  fetchCities,
+  cityName
 }

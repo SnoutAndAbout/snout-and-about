@@ -1,6 +1,7 @@
 const { createUser, loginUser, validateUser} = require('./db/users.js');
 const { fetchEvents, localEvents, createEvent, deleteEvent, viewEvent, whereEvents } = require('./db/events.js');
 const { updateCalendar, cancelEvent , myCalendar } = require('./db/calendar.js')
+const { fetchCities, cityCheck, cityName } = require('./db/cities.js');
 
 
 const client = require('./db/client.js');
@@ -28,11 +29,11 @@ app.get('/api/events', async(req,res) => {
     res.send(error.message)
   }
 })
-//GET EVENTS BY REGION//
-app.get('/api/events/:region', async(req,res) => {
+//GET EVENTS BY REGION USING CITY ID//
+app.get('/api/events/:cityId', async(req,res) => {
   const { region } = req.params;
   try {
-    const events = await localEvents(region);
+    const events = await localEvents(cityId);
     res.send(events);
   } catch (error) {
     res.send(error.message);
@@ -51,8 +52,18 @@ app.get('/api/calendar/:userId', async(req,res) => {
 //GET CITIES WITH EVENTS//
 app.get('/api/cities', async(req,res) => {
   try {
-    const cities = await whereEvents();
+    const cities = await fetchCities();
     res.send(cities);
+  } catch (error) {
+    throw new Error(error);
+  }
+})
+//GET A CITIES NAME FROM ITS ID//
+app.get('/api/city/:id', async(req,res) => {
+  const { id } = req.params;
+  try {
+    const cityObj = await cityName(id);
+    res.send(cityObj);
   } catch (error) {
     throw new Error(error);
   }
