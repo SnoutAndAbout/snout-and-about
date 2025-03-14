@@ -40,7 +40,7 @@ const Login = () => {
 
       setMessage("Login successful!");
       setCredentials({ username: "", password: "" });
-      window.location.href = "/dashboard"; 
+      window.location.href = "/home"; 
 
     } catch (err) {
       setError(err.message || "An error occurred, please try again.");
