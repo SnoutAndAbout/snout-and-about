@@ -9,11 +9,11 @@ const Event = () => {
   useEffect(() => {
     const getEvent = async(id) => {
       const response = await fetch(`https://snout-and-about.onrender.com/api/event/${id}`);
-      const jsonObj = await response.json();
+      const event = await response.json();
       const response2 = await fetch(`https://snout-and-about.onrender.com/api/city/${jsonObj.location}`)
-      const jsonObj2 = await response2.json();
-      setCityName(jsonObj);
-      setEvent(jsonObj2);
+      const name = await response2.json();
+      setCityName(name);
+      setEvent(event);
     }
     getEvent(eventId);
   },eventId)
