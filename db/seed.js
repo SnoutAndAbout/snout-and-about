@@ -8,6 +8,7 @@ const dropTables = async() => {
     await client.query(`
       DROP TABLE IF EXISTS calendar;
       DROP TABLE IF EXISTS events;
+      DROP TABLE IF EXISTS cities;
       DROP TABLE IF EXISTS users;
     `);
   } catch (error) {
