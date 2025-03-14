@@ -30,7 +30,7 @@ app.get('/api/events', async(req,res) => {
   }
 })
 //GET A EVENT//
-app.get('/api/events/:eventId', async(req,res) => {
+app.get('/api/event/:eventId', async(req,res) => {
   const { eventId } = req.params;
   try {
     const event = await viewEvent(eventId);

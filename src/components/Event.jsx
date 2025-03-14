@@ -8,7 +8,7 @@ const Event = () => {
 
   useEffect(() => {
     const getEvent = async(id) => {
-      const response = await fetch(`https://snout-and-about.onrender.com/api/events/${id}`);
+      const response = await fetch(`https://snout-and-about.onrender.com/api/event/${id}`);
       const jsonObj = await response.json();
       setEvent(jsonObj);
     }
@@ -25,7 +25,7 @@ const Event = () => {
   return (
     <>
     {
-      (event.id && cityName)?
+      (event.id && cityName.name)?
       <div id='event'>
         <h1>{event.name}</h1>
         <h2>in {cityName.name} at {event.date}</h2>
