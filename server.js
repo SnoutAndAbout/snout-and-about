@@ -29,9 +29,9 @@ app.get('/api/events', async(req,res) => {
     res.send(error.message)
   }
 })
-//GET EVENTS BY REGION USING CITY ID//
+//GET EVENTS BY REGION USING CITY ID// 
 app.get('/api/events/:cityId', async(req,res) => {
-  const { region } = req.params;
+  const { cityId } = req.params;
   try {
     const events = await localEvents(cityId);
     res.send(events);
