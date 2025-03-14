@@ -20,11 +20,21 @@ app.use(cors());
 
 
 //      GET REQUESTS      //
-//GET ALL EVENTS/
+//GET ALL EVENTS//
 app.get('/api/events', async(req,res) => {
   try {
     const events = await fetchEvents();
     res.send(events);
+  } catch (error) {
+    res.send(error.message)
+  }
+})
+//GET A EVENT//
+app.get('/api/events/:eventId', async(req,res) => {
+  const { eventId } = req.params;
+  try {
+    const event = await viewEvent(eventId);
+    res.send(event);
   } catch (error) {
     res.send(error.message)
   }

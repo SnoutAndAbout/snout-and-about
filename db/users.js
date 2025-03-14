@@ -36,7 +36,6 @@ const loginUser = async (inputUser, inputPassword) => {
         return token;
       }
     } else {
-      console.log('here');
       throw new Error('Bad Credentials');
     }
   } catch (err) {
