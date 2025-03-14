@@ -13,7 +13,7 @@ const City = () => {
       setEvents(jsonObj);
     }
     const getCityName = async() => {
-      const response = await fetch(`https://snout-and-about.onrender.com/api/events/region/api/city/${cityId}`)
+      const response = await fetch(`https://snout-and-about.onrender.com/api/city/${cityId}`)
       const jsonObj = await response.json();
       setCityName(jsonObj);
     }
@@ -24,19 +24,23 @@ const City = () => {
   return (
     <>
       {
-        cityName?
-        <h1>{cityName}</h1>
+        cityName.name?
+        <h1>{cityName.name}</h1>
         :
-        <></>
+        <>
+          <p>Finding your city....</p>
+        </>
       }
       {
-        events?
+        events[0]?
         <div id='event-calendar'>
           <ul>
             {
               events.map((event) => {
                 return (
-                  <li>{event.name}</li>
+                  <div key={event.id}>
+                    <li>{event.name}</li>
+                  </div>
                 )
               })
             }
