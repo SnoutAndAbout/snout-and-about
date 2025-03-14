@@ -61,8 +61,31 @@ const validateUser = async (token) => {
   }
 }
 
+const fetchUsers = async() => {
+  try {
+    const {rows} = await client.query(`
+      SELECT * FROM users;
+    `);
+    return rows;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+const deleteUser = async( userId ) => {
+  try {
+    await client.query(`
+      DELETE FROM users WHERE id=${userId};
+    `);
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
 module.exports = {
   createUser,
   loginUser,
-  validateUser
+  validateUser,
+  fetchUsers,
+  deleteUser
 }

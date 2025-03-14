@@ -1,4 +1,4 @@
-const { createUser, loginUser, validateUser} = require('./db/users.js');
+const { createUser, loginUser, validateUser, fetchUsers} = require('./db/users.js');
 const { fetchEvents, localEvents, createEvent, deleteEvent, viewEvent, whereEvents } = require('./db/events.js');
 const { updateCalendar, cancelEvent , myCalendar } = require('./db/calendar.js')
 const { fetchCities, cityCheck, cityName } = require('./db/cities.js');
@@ -68,6 +68,16 @@ app.get('/api/city/:id', async(req,res) => {
     throw new Error(error);
   }
 })
+//GET ALL THE USERS//
+app.get('/api/users', async(req,res) => {
+  try {
+    const users = await fetchUsers();
+    const data = users.map((user)=>{return { "id":user.id,"username":user.username,"name":user.name}})
+    res.send(data);
+  } catch (error) {
+    throw new Error(error);    
+  }
+});
 //DEFAULT//
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
@@ -142,13 +152,28 @@ app.delete('/api/events', async(req,res,next) => {
     const { token } = req.headers;
     const userData = await validateUser(token);
     if(userData){
-      const event = await deleteEvent(eventId);
-      res.status(200).send(event);
+      await deleteEvent(eventId);
+      res.status(200).send('Event Deleted');
     }else{
       throw new Error('Bad Token')
     } 
   } catch (error) {
     console.log(error);
+  }
+})
+//DELETE USER//
+app.delete('/api/users', async(req,res,next) => {
+  try {
+    const { token } = req.headers;
+    const userData = await validateUser(token);
+    if(userData){
+      await deleteEvent(userData.Id);
+      res.status(200).send('User Deleted');
+    }else{
+      throw new Error('Bad Token')
+    }
+  } catch (error) {
+    throw new Error(error);
   }
 })
 

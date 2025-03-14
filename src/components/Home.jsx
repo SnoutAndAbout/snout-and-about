@@ -35,7 +35,7 @@ const Home = () => {
                   {
                     cities.map((city)=>{
                       return (
-                        <div key={city}>
+                        <div key={city.id}>
                           <li>
                             <Link to={`/city/${city.id}`}>{city.name}, {city.state}</Link>
                           </li>
