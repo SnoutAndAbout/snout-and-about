@@ -28,7 +28,9 @@ const createUser = () => {
     });
 
     const data = await response.json();
+    localStorage.setItem("token", data.token); 
     console.log("User Registered:", data);
+
 
     setUser({
       username: "",
