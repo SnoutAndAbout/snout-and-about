@@ -37,7 +37,7 @@ const Home = () => {
                       return (
                         <div key={city}>
                           <li>
-                            <Link to={`/city/${city.split(',')[0]}`}>{city}</Link>
+                            <Link to={`/city/${city.id}`}>{city.name}, {city.state}</Link>
                           </li>
                         </div>
                       )
