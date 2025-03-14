@@ -25,7 +25,7 @@ const Event = () => {
   return (
     <>
     {
-      (event.id && cityName)?
+      (event.id && cityName.name)?
       <div id='event'>
         <h1>{event.name}</h1>
         <h2>in {cityName.name} at {event.date}</h2>
