@@ -1,15 +1,13 @@
 form{
   display: flex;
   flex-direction: column;
-  width: 10%
+  width: 130px
   
 }
 .Navbar-container {
   text-align: center;
   padding: 20px;
 }
-
-
 
 nav {
   display: flex;

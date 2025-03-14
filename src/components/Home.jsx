@@ -19,7 +19,7 @@ const Home = () => {
    
       <main>
         <h2>Home Page</h2>
-        <div class="registration">
+        <div className="registration">
           <Registration/>
         </div>
         
