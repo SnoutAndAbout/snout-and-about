@@ -10,7 +10,7 @@ const Event = () => {
     const getEvent = async(id) => {
       const response = await fetch(`https://snout-and-about.onrender.com/api/event/${id}`);
       const event = await response.json();
-      const response2 = await fetch(`https://snout-and-about.onrender.com/api/city/${jsonObj.location}`)
+      const response2 = await fetch(`https://snout-and-about.onrender.com/api/city/${event.location}`)
       const name = await response2.json();
       setCityName(name);
       setEvent(event);
