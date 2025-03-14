@@ -19,7 +19,7 @@ const City = () => {
     }
     getCityName();
     getEvents();
-  }, [cityId])
+  }, cityId)
 
   return (
     <>
@@ -47,7 +47,9 @@ const City = () => {
           </ul>
         </div>
         :
-        <></>
+        <>
+          <p>No events here yet....</p>
+        </>
       }
     
     </>
