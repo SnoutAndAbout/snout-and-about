@@ -55,11 +55,11 @@ const stateDict = [
 
 const cityCheck = async( cityName ) => {
   try {
-    const {city,state} = cityName.split(',').map((x)=>{x.trim()});
-    let stateName = state;
+    const [city,stateN] = cityName.split(',').map((word)=>word.trim());
+    let stateName = stateN;
     //PARSING THE STATE NAME TO THE PROPER VALUE
     for (state in stateDict){
-      if(stateDict[state].aliases.map((x)=>{x.toLowerCase()}).includes(stateName.toLowerCase())){
+      if(stateDict[state].aliases.map((x)=>x.toLowerCase()).includes(stateName.toLowerCase())){
         stateName = stateDict[state].name
       }
     }
@@ -68,7 +68,7 @@ const cityCheck = async( cityName ) => {
     `);
     //CHECKING TO SEE IF OUR CITY IS ALREADY IN THE TABLE
     for (row in rows) {
-      if((row.name.replace(/ /g,'').toLowerCase()==city.replace(/ /g,'').toLowerCase()) && (row.state==stateName)){
+      if((rows[row].name.replace(/ /g,'').toLowerCase()==city.replace(/ /g,'').toLowerCase()) && (row.state==stateName)){
         return row.id;
       }
     }
@@ -76,6 +76,7 @@ const cityCheck = async( cityName ) => {
     const newCityId = await addCity(city,stateName);
     return newCityId;
   } catch (error) {
+    console.log(error)
     throw new Error(error)
   }
 }
@@ -84,11 +85,11 @@ const cityCheck = async( cityName ) => {
 //ADDS A NEW CITY TO THE CITY TABLE
 const addCity = async( cityName, stateName ) => {
   //MAKES SURE THE CITY NAME IS FORTMATTED WELL WITH SPACES AND CAPITAL LETTERS
-  const parsedName = cityName.split(' ').map((word) => { word[0].toUpperCase()+word.slice(1).toLowerCase()}).join(' ');
+  const parsedName = cityName.split(' ').map((word) => word[0].toUpperCase()+word.slice(1).toLowerCase()).join(' ');
   try {
     const {rows} = await client.query(`
-      INSERT INTO cities ( name, state)
-      VALUES (${parsedName}, ${stateName})
+      INSERT INTO cities ( name, state )
+      VALUES ('${parsedName}', '${stateName}')
       RETURNING *;
     `);
       return rows[0].id;
@@ -124,5 +125,6 @@ const cityName = async(id) => {
 module.exports = {
   cityCheck,
   fetchCities,
-  cityName
+  cityName,
+  addCity
 }

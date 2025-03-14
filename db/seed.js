@@ -2,6 +2,7 @@ const client = require('./client.js');
 const { createUser, loginUser, validateUser} = require('./users.js');
 const { fetchEvents, localEvents, createEvent, deleteEvent } = require('./events.js');
 const { updateCalendar } = require('./calendar.js')
+const { addCity } = require('./cities.js')
 
 const dropTables = async() => {
   try {
@@ -77,6 +78,10 @@ const seeder = async() => {
   console.log('Loggin in...');
   await loginUser('user1','testtest');
   console.log('Logged in!')
+
+  console.log('Creating the first city...');
+  await addCity( 'Denver', 'CO');
+  console.log('City Added!');
 
   console.log('Creating an event...')
   const event1 = await createEvent('11/03/2025','First day of coding.','Lets get this baby started!','New York City, New York',1);

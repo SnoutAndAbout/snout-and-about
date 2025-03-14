@@ -28,6 +28,7 @@ const createEvent = async( date, name, description, location, creatorId, picture
       return event;
     }
   } catch (error) {
+    console.log(error);
     throw new Error(error);
   }
 }
