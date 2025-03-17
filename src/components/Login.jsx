@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Registration from "./Registration";
-import '../css/home.css';
+import '../css/Home.css';
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
