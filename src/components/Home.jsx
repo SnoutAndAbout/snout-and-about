@@ -1,7 +1,7 @@
 import { React, useEffect, useState} from "react";
 import { Link } from "react-router-dom"
 import '../css/Home.css';
-import Registration from "./Registration";
+
 
 const Home = () => {
   const [cities, setCities] = useState([]);
@@ -15,13 +15,15 @@ const Home = () => {
     getCities();
   }, [])
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.reload(); 
+  };
+
   return (
    
       <main>
         <h2>Home Page</h2>
-        <div className="registration">
-          <Registration/>
-        </div>
         
         <div>
 
@@ -58,6 +60,7 @@ const Home = () => {
 
        
         <button>Post an Event</button>
+        <button onClick={handleLogout}>Logout</button>
       </main>
     
   );
