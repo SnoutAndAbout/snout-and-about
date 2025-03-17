@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 
-const createUser = () => {
+const CreateUser = () => {
   const [user, setUser] = useState({
     username: "",
     password: "",
     name: "",
   });
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,37 +19,53 @@ const createUser = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('https://snout-and-about.onrender.com/api/auth/register', {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: user.name,
-        username: user.username,
-        password: user.password,
-      }),
-    });
-
-    const data = await response.json();
-    localStorage.setItem("token", data.token); 
-    console.log("User Registered:", data);
-
-
-    setUser({
-      username: "",
-      password: "",
-      name: "",
-    });
+    setMessage("");
+    setError("");
+  
+    try {
+      const response = await fetch("https://snout-and-about.onrender.com/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: user.name,
+          username: user.username,
+          password: user.password,
+        }),
+      });
+  
+      const text = await response.text();
+  
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        throw new Error(text);
+      }
+  
+      if (response.ok) {
+        localStorage.setItem("token", data.token);
+        setMessage("Registration complete!");
+        setUser({ username: "", password: "", name: "" });
+      } else {
+        if (text.includes("duplicate key value violates unique constraint \"users_username_key\"")) {
+          setError("Username already exists. Please choose a different one.");
+        } else {
+          setError(data.message || "User registration failed.");
+        }
+      }
+    } catch (error) {
+      setError(error.message || "An error occurred. Please try again later.");
+    }
   };
 
   return (
     <div>
-      <h2>Register</h2>
       <form onSubmit={handleSubmit}>
         <label>Username</label>
         <input
           type="text"
           id="username"
-          name="username" 
+          name="username"
           value={user.username}
           onChange={handleChange}
           required
@@ -72,8 +90,10 @@ const createUser = () => {
         />
         <button>Register</button>
       </form>
+      {message && <p style={{ color: "green" }}>{message}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 };
 
-export default createUser;
+export default CreateUser;

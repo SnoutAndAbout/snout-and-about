@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Registration from "./Registration";
+import '../css/home.css';
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -49,6 +51,10 @@ const Login = () => {
 
   return (
     <div>
+      <h2>Register New User</h2>
+       <div className="registration">
+                <Registration/>
+              </div>
       <h2>Login</h2>
       {error && <p style={{ color: "red" }}>{error}</p>}
       {message && <p style={{ color: "green" }}>{message}</p>}
@@ -69,7 +75,7 @@ const Login = () => {
           onChange={handleChange}
           required
         />
-        <button type="submit">Login</button>
+        <button classtype="submit">Login</button>
       </form>
     </div>
   );
