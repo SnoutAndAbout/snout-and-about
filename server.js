@@ -75,6 +75,7 @@ app.get('/api/city/:id', async(req,res) => {
     const cityObj = await cityName(id);
     res.send(cityObj);
   } catch (error) {
+    console.log(error)
     throw new Error(error);
   }
 })
