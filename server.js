@@ -53,7 +53,10 @@ app.get('/api/events/:cityId', async(req,res) => {
 app.get('/api/calendar/:userId', async(req,res) => {
   const { userId } = req.params;
   try {
-    const events = await myCalendar(userId);
+    const events = await fetchEvents();
+    const calendar = await myCalendar(userId);
+    calendar = calendar.map((entry)=> { return entry.event_id });
+    events = events.filter((event) => calendar.includes(event.id));
     res.send(events);
   } catch (error) {
     res.send(error.message);
