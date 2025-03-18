@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import Calendars from "./Calendars";
 
 const City = () => {
   let { cityId } = useParams();
@@ -19,7 +20,7 @@ const City = () => {
     }
     getCityName();
     getEvents();
-  }, cityId)
+  }, [cityId])
 
   return (
     <>
@@ -33,19 +34,7 @@ const City = () => {
       }
       {
         events[0]?
-        <div id='event-calendar'>
-          <ul>
-            {
-              events.map((event) => {
-                return (
-                  <div key={event.id}>
-                    <li>{event.name}</li>
-                  </div>
-                )
-              })
-            }
-          </ul>
-        </div>
+          <Calendars events={events}/>
         :
         <>
           <p>No events here yet....</p>

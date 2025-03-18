@@ -89,6 +89,16 @@ app.get('/api/users', async(req,res) => {
     throw new Error(error);    
   }
 });
+//GET ONE USER//
+app.get('/api/me', async(req,res) => {
+  try {
+    const { token } = req.headers;
+    const user = await validateUser(token);
+    res.send(user);
+  } catch (error) {
+    throw new Error(error);    
+  }
+});
 //DEFAULT//
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
