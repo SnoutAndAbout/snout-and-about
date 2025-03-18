@@ -47,14 +47,13 @@ const CreateUser = () => {
         setMessage("Registration complete!");
         setUser({ username: "", password: "", name: "" });
       } else {
-        if (text.includes("duplicate key value violates unique constraint \"users_username_key\"")) {
-          setError("Username already exists. Please choose a different one.");
-        } else {
-          setError(data.message || "User registration failed.");
-        }
       }
     } catch (error) {
-      setError(error.message || "An error occurred. Please try again later.");
+      if (error.message.includes("duplicate key value violates unique constraint \"users_username_key\"")) {
+        setError("Username already exists. Please choose a different one.");
+      } else {
+        setError(error.message || "User registration failed.");
+      }
     }
   };
 
