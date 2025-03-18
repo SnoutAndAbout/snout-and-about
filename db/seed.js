@@ -36,7 +36,7 @@ const createTables = async() => {
       CREATE TABLE events (
         id SERIAL PRIMARY KEY,
         date DATE NOT NULL,
-        name VARCHAR(50) UNIQUE NOT NULL,
+        name VARCHAR(50) NOT NULL,
         description VARCHAR(255) NOT NULL,
         location INT NOT NULL REFERENCES cities(id),
         picture VARCHAR(255) UNIQUE,
