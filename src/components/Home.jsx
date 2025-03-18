@@ -59,7 +59,7 @@ const Home = () => {
         </div>
 
        
-        <button>Post an Event</button>
+       <a href="/#/post"> <button>Post an Event</button></a>
         <button onClick={handleLogout}>Logout</button>
       </main>
     
