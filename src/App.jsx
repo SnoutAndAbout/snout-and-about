@@ -7,6 +7,7 @@ import Registration from "./components/Registration";
 import Account from "./components/Account";
 import Event from "./components/Event";
 import Login from "./components/Login"
+import Post from "./components/Post";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/events/:eventId" element={<Event/>}/>
         <Route path="/Login" element={<Login/>}/>
         <Route path="/account" element={<Account/>}/>
+        <Route path="/post" element={<Post/>}/>
       </Routes>
     </div>
   );
