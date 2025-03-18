@@ -68,8 +68,8 @@ const cityCheck = async( cityName ) => {
     `);
     //CHECKING TO SEE IF OUR CITY IS ALREADY IN THE TABLE
     for (row in rows) {
-      if((rows[row].name.replace(/ /g,'').toLowerCase()==city.replace(/ /g,'').toLowerCase()) && (row.state==stateName)){
-        return row.id;
+      if((rows[row].name.replace(/ /g,'').toLowerCase()==city.replace(/ /g,'').toLowerCase()) && (rows[row].state==stateName)){
+        return rows[row].id;
       }
     }
     //CREATES A NEW CITY ENTRY AND RETURNS ITS ID
