@@ -9,7 +9,6 @@ const [value, setValue] = useState(new Date());
 
 const onChange = (nextValue) => {
   setValue(nextValue);
-  console.log(value)
 }
 
 const isSameDay = (a, b) => {
