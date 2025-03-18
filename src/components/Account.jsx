@@ -13,9 +13,10 @@ const Account = ()=>{
         method: "GET",
         headers: {"token":token}
       });
+      console.log(response);
       const jsonObj = await response.json();
+      console.log(jsonObj);
       setUser(jsonObj);
-      console.log('userobj',Object.keys(user));
       console.log('id',user.id);
       const eventResponse = await fetch(`https://snout-and-about.onrender.com/api/calendar/${user.id}`);
       const events = await eventResponse.json();
