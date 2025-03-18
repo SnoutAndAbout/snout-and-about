@@ -19,7 +19,7 @@ const tileContent = ({date, view}) => {
   if(view === 'month') {
     for(const event in events){
       if (isSameDay(new Date(events[event].date), date)){
-        return events[event].name;
+        return '➊';
       }
     }
     // if(datesToAddContentTo.find(dDate => isSameDay(dDate[0], date))) {
