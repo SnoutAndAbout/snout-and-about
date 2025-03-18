@@ -131,6 +131,7 @@ app.post('/api/auth/register', async (req, res, next) => {
 //POST EVENT
 app.post('/api/events', async(req,res,next) => {
   try {
+    console.log('req body', req.body);
     const { date, name, description, location, picture} = req.body;
     const { token } = req.headers;
     const userData = await validateUser(token);
