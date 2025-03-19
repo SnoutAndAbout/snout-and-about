@@ -55,6 +55,9 @@ const stateDict = [
 
 const cityCheck = async( cityName ) => {
   try {
+    if(!cityName.includes(',')){
+      throw new Error('Bad city format. Please input a city in the format: (city name), (state name).')
+    }
     const [city,stateN] = cityName.split(',').map((word)=>word.trim());
     let stateName = stateN;
     //PARSING THE STATE NAME TO THE PROPER VALUE
@@ -76,7 +79,7 @@ const cityCheck = async( cityName ) => {
       }
     }
     //CREATES A NEW CITY ENTRY AND RETURNS ITS ID
-    const newCityId = await addCity(city,stateName);
+    const newCityId = await addCity(city[0].toUpperCase()+city.slice(1).toLowerCase(),stateName);
     return newCityId;
   } catch (error) {
     console.log(error)
