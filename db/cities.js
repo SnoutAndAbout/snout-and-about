@@ -63,6 +63,9 @@ const cityCheck = async( cityName ) => {
         stateName = stateDict[state].name
       }
     }
+    if(!(stateDict.keys().includes(stateName))){
+      throw new Error('Bad State Specification');
+    }
     const {rows} = await client.query(`
       SELECT * FROM cities;
     `);
