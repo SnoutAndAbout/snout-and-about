@@ -42,6 +42,7 @@ const Account = ()=>{
         <Calendars events={myEvents} />
         :
         <>
+        <p>You have no events currently.</p>
         </>
       }
     </>

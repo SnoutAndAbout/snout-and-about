@@ -17,7 +17,7 @@ const Event = () => {
       setEvent(event);
     }
     getEvent(eventId);
-  },eventId)
+  },[eventId])
 
 
   return (
@@ -26,7 +26,8 @@ const Event = () => {
       (event.id && cityName.name)?
       <div id='event'>
         <h1>{event.name}</h1>
-        <h2>in {cityName.name} at {event.date}</h2>
+        <h2>{(new Date(event.date)).toDateString()}</h2>
+        <h2>in {cityName.name}</h2>
         {
           event.picture?
           <img src={event.picture}></img>
