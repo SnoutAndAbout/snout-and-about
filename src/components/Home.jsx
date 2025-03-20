@@ -1,68 +1,66 @@
-import { React, useEffect, useState} from "react";
-import { Link } from "react-router-dom"
-import '../css/Home.css';
-
+import { React, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "../css/Home.css";
 
 const Home = () => {
   const [cities, setCities] = useState([]);
 
   useEffect(() => {
-    const getCities = async() => {
-      const response = await fetch('https://snout-and-about.onrender.com/api/cities');
+    const getCities = async () => {
+      const response = await fetch("https://snout-and-about.onrender.com/api/cities");
       const jsonObj = await response.json();
       setCities(jsonObj);
-    }
+    };
     getCities();
-  }, [])
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.reload(); 
+    window.location.reload();
   };
 
   return (
-   
-      <main>
-        <h2>Home Page</h2>
-        
-        <div>
+    <main className="home-container">
+      <section className="intro">
+        <h1>🐾 Welcome to Snout & About! 🏙️</h1>
+        <p>
+          Your ultimate guide to pet-friendly adventures! Explore dog parks,  
+          pet-friendly cafés, and exciting pet events happening near you.  
+          Whether you want to meet fellow pet lovers or plan an outing for  
+          your furry friend, we've got you covered!  
+        </p>
+        <p>
+          Browse cities below or post your own pet-friendly event! 🐶🎉
+        </p>
+      </section>
 
-          <div>
-            <>
-            {
-              cities[0]?
-              <div id="cities">
-                <h3>Cities:</h3>
-                <ul id='city-list'>
-                  {
-                    cities.map((city)=>{
-                      return (
-                        <div key={city.id}>
-                          <li>
-                            <Link to={`/city/${city.id}`}>{city.name}, {city.state}</Link>
-                          </li>
-                        </div>
-                      )
-                    })
-                  }
-                </ul>
-              </div>
-              :
-              <>
-              </>
-            }
-            
-              
-            </>
-
+      <section className="cities-section">
+        {cities.length > 0 ? (
+          <div className="cities-container">
+            <h2>📍 Explore Cities:</h2>
+            <ul className="city-list">
+              {cities.map((city) => (
+                <li key={city.id}>
+                  <Link to={`/city/${city.id}`}>
+                    {city.name}, {city.state}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
+        ) : (
+          <p>Loading cities...</p>
+        )}
+      </section>
 
-       
-       <a href="/#/post"> <button>Post an Event</button></a>
-        <button onClick={handleLogout}>Logout</button>
-      </main>
-    
+      
+      <div className="buttons">
+        <Link to="/post">
+          <button className="post-btn">📢 Post an Event</button>
+        </Link>
+        <button className="logout-btn" onClick={handleLogout}>🚪 Logout</button>
+      </div>
+    </main>
   );
 };
 
