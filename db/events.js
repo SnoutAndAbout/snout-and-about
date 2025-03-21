@@ -6,7 +6,6 @@ const { cityCheck } = require('./cities.js');
 //CREATES A NEW EVENT, A PICTURE ENTRY IS NOT REQUIRED
 const createEvent = async( date, name, description, location, creatorId, picture=null) => {
   try {
-    console.log(date,name,description,location,creatorId,picture);
     if(picture){
       const locId = await cityCheck(location);
       const { rows } = await client.query(`
@@ -15,7 +14,7 @@ const createEvent = async( date, name, description, location, creatorId, picture
         RETURNING *;
       `);
       const event = rows[0];
-      await updateCalendar( event.id, event.creator_id);
+      await updateCalendar( event.name, event.id, event.creator_id);
       return event;
     }else{
       const locId = await cityCheck(location);
