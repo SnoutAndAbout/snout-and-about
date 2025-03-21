@@ -1,5 +1,6 @@
 #calendar {
   background-color: antiquewhite;
+  border: solid #222 1px;
 }
 
 #calendar > div.react-calendar > div.react-calendar__viewContainer > div > div > div > div.react-calendar__month-view__days > button {
