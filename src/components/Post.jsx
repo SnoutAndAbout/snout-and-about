@@ -6,6 +6,8 @@ const Post =()=>{
   const [description, setDescription] = useState("")
   const [location, setLocation] = useState("")
   const [picture, setPicture] = useState("")
+  const [formSubmit, setFormSubmit] = useState(false)
+  const [formError, setFormError] = useState(null)
 
   const handleSubmit=async(e)=>{
     e.preventDefault()
@@ -22,11 +24,26 @@ const Post =()=>{
     console.log(response)
     const result=await response.json()
     console.log(result)
+
+    setDate(Date.now());
+    setName("");
+    setDescription("");
+    setLocation("");
+    setPicture("");
+    setFormSubmit(true);
+    setTimeout(() => {
+      setFormSubmit(false);
+    }, 10000);
+   
+  
+
+
+    
   }
 
   return (
     <>
-    <form onSubmit={handleSubmit}>
+    <form id="post-form" onSubmit={handleSubmit}>
 
       <input 
       type="date"
@@ -57,9 +74,12 @@ const Post =()=>{
       value={picture}
       onChange={(e)=>setPicture(e.target.value)}/>
       <button>Submit Event</button>
-
     </form>
+    {formSubmit && <p style={{color:"green"}}> Event Submitted Successfully!</p>}
+    
     </>
+     
+     
   )
 }
 
