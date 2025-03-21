@@ -1,10 +1,10 @@
 const client = require('./client.js');
-const { createUser, loginUser, validateUser} = require('./users.js');
+const { createUser, loginUser, validateUser } = require('./users.js');
 const { fetchEvents, localEvents, createEvent, deleteEvent } = require('./events.js');
 const { updateCalendar } = require('./calendar.js')
 const { addCity, cityCheck } = require('./cities.js')
 
-const dropTables = async() => {
+const dropTables = async () => {
   try {
     await client.query(`
       DROP TABLE IF EXISTS calendar;
@@ -17,7 +17,7 @@ const dropTables = async() => {
   }
 }
 
-const createTables = async() => {
+const createTables = async () => {
   try {
     await client.query(`
       CREATE TABLE users (
@@ -56,7 +56,7 @@ const createTables = async() => {
 }
 
 
-const seeder = async() => {
+const seeder = async () => {
   console.log('Connecting to client...')
   await client.connect();
   console.log('Connected!')
@@ -70,13 +70,13 @@ const seeder = async() => {
   console.log('Generated!');
 
   console.log('Creating dummy users....');
-  const user1 = await createUser('user1', 'testtest','test ter');
-  const user2 = await createUser('testUser', 'password','User Test');
-  const user3 = await createUser('johnDoe', 'johndoe','John Doe');
+  const user1 = await createUser('user1', 'testtest', 'test ter');
+  const user2 = await createUser('testUser', 'password', 'User Test');
+  const user3 = await createUser('johnDoe', 'johndoe', 'John Doe');
   console.log('Users Created!')
 
   console.log('Loggin in...');
-  await loginUser('user1','testtest');
+  await loginUser('user1', 'testtest');
   console.log('Logged in!')
 
   console.log('Creating the first city...');
@@ -84,9 +84,19 @@ const seeder = async() => {
   console.log('City Added!');
 
   console.log('Creating an event...')
-  const event1 = await createEvent('11/03/2025','First day of coding.','Lets get this baby started!','New York City, New York',1);
-  const event2 = await createEvent('11/04/2025','Second day of coding.','we are started!', 'Joliet, Illinois',2);
-  const event3 = await createEvent('11/05/2025','Third day of coding.','starting the started!', 'Phoenix, Arizona',3);
+  const event1 = await createEvent("04/15/2025", "Dog Parade", "Dress up your furry friend and join us for a fun-filled dog parade! Prizes for the best costumes.", "Los Angeles, California", 1);
+  const event2 = await createEvent("05/10/2025", "Paws & Play Meetup", "A fun day at the park with agility courses, treats, and socializing for dogs and owners alike.", "Austin, Texas", 2);
+  const event3 = await createEvent("06/20/2025", "Doggy Ice Cream Social", "Cool off with your pup at our ice cream social featuring dog-friendly frozen treats!", "Chicago, Illinois", 3);
+  const event4 = await createEvent("07/08/2025", "Beach Day with Dogs", "Sun, sand, and splashes! Bring your dog for a fun beach day with games and swimming.", "Miami, Florida", 2);
+  const event5 = await createEvent("08/12/2025", "Puppy Yoga", "Relax and stretch with adorable puppies in this unique yoga session designed for both humans and dogs.", "San Francisco, California", 1);
+  const event6 = await createEvent("06/08/2025", "Yappy Hour at the Park", "Unwind with fellow dog lovers at this pet-friendly happy hour featuring treats for humans and pups.", "Chicago, Illinois", 2);  
+  const event7 = await createEvent("06/15/2025", "Canine Carnival", "A fun carnival for dogs with obstacle courses, treat stations, and costume contests.", "Chicago, Illinois", 3);  
+  const event8 = await createEvent("06/18/2025", "Fetch & Frisbee Tournament", "Compete in a friendly frisbee and fetch competition with prizes for the top dogs.", "Chicago, Illinois", 3);  
+  const event9 = await createEvent("06/25/2025", "Dog Yoga & Meditation", "Enjoy a calming yoga session designed for you and your furry companion.", "Chicago, Illinois", 2);  
+  const event10 = await createEvent("06/30/2025", "Puppy Paddle Day", "Take your pup for a kayak or paddleboard ride on Lake Michigan at this dog-friendly event.", "Chicago, Illinois", 3);  
+
+  
+
   console.log('Event Created!');
 
   console.log('updating calendar')
