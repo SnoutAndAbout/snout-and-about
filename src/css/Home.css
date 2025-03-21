@@ -1,6 +1,4 @@
 body {
-  background-size: cover;
-  background-position: center;
   background-attachment: fixed;
   background-image: url('../../img/petbackground.jpg');
   min-height: 100vh;
@@ -106,6 +104,8 @@ nav h1 {
 nav ul {
   list-style: none;
   display: flex;
+  align-items: center;
+  justify-items: center;
   gap: 15px;
   padding: 0;
   margin: 0;
@@ -113,6 +113,7 @@ nav ul {
 
 nav ul li {
   display: inline;
+  justify-items: center;
 }
 
 nav ul li a {
@@ -256,4 +257,29 @@ button:hover {
     width: 95%;
     height: 200px;
   }
+}
+
+#user-details {
+  justify-items: center;
+}
+
+#user-details > h1 {
+  background-color: antiquewhite;
+  border: solid #222 1px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+#city-name {
+  justify-self: center;
+  background-color: antiquewhite;
+  border: solid #222 1px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+#no-events {
+  justify-self: center;
+  align-self: center;
+  background-color: antiquewhite;
+  border: solid #222 1px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
 }

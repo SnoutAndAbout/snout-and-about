@@ -11,10 +11,9 @@ const Navbar = ()=> {
       <nav>
         <h1>Snout And About</h1>
         <ul>
-     <li><Link to="/">Home</Link></li>
-      <li><Link to="/registration"></Link></li>
-     <li>{token ? <Link to="/account">Account</Link>:<Link to="/Login">Login</Link>}</li>
-     <li><button className="logout-btn" onClick={handleLogout}>Logout</button></li>
+          <li><div><Link to="/">Home</Link></div></li>
+          <li>{token ? <Link to="/account">Account</Link>:<Link to="/Login">Login</Link>}</li>
+          <li>{token ? <button className="logout-btn" onClick={handleLogout}>Logout</button> : <></>}</li>
       </ul>
       </nav>
     </div>

@@ -26,7 +26,7 @@ const City = () => {
     <>
       {
         cityName.name?
-        <h1>{cityName.name}</h1>
+        <h1 id="city-name">{cityName.name}</h1>
         :
         <>
           <p>Finding your city....</p>
@@ -37,7 +37,7 @@ const City = () => {
           <Calendars events={events}/>
         :
         <>
-          <p>No events here yet....</p>
+          <h2 id='no-events'>No events here yet...</h2>
         </>
       }
     
