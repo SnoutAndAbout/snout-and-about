@@ -84,7 +84,7 @@ const seeder = async () => {
   console.log('City Added!');
 
   console.log('Creating an event...')
-  const event1 = await createEvent("04/15/2025", "Dog Parade", "Dress up your furry friend and join us for a fun-filled dog parade! Prizes for the best costumes.", "Los Angeles, California", 1);
+  const event1 = await createEvent("04/15/2025", "Dog Parade", "Dress up your furry friend and join us for a fun-filled dog parade! Prizes for the best costumes.", "Los Angeles, California", 1,'https://people.com/thmb/qJuj4StvCovnM-IyKbk8YlN2vCA=/4000x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/nyc-halloween-dog-parade-8-102323-f1b2c96e3eff45548850fd9581eabe2b.jpg');
   const event2 = await createEvent("05/10/2025", "Paws & Play Meetup", "A fun day at the park with agility courses, treats, and socializing for dogs and owners alike.", "Austin, Texas", 2);
   const event3 = await createEvent("06/20/2025", "Doggy Ice Cream Social", "Cool off with your pup at our ice cream social featuring dog-friendly frozen treats!", "Chicago, Illinois", 3);
   const event4 = await createEvent("07/08/2025", "Beach Day with Dogs", "Sun, sand, and splashes! Bring your dog for a fun beach day with games and swimming.", "Miami, Florida", 2);
