@@ -6,6 +6,7 @@ const { cityCheck } = require('./cities.js');
 //CREATES A NEW EVENT, A PICTURE ENTRY IS NOT REQUIRED
 const createEvent = async( date, name, description, location, creatorId, picture=null) => {
   try {
+    console.log(date,name,description,location,creatorId,picture);
     if(picture){
       const locId = await cityCheck(location);
       const { rows } = await client.query(`
