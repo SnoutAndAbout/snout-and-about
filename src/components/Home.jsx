@@ -14,11 +14,6 @@ const Home = () => {
     getCities();
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location.reload();
-  };
-
   return (
     <main className="home-container">
       <section className="intro">
@@ -58,7 +53,7 @@ const Home = () => {
         <Link to="/post">
           <button className="post-btn">📢 Post an Event</button>
         </Link>
-        <button className="logout-btn" onClick={handleLogout}>🚪 Logout</button>
+        
       </div>
     </main>
   );
