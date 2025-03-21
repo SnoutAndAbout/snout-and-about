@@ -1,0 +1,21 @@
+#calendar {
+  background-color: antiquewhite;
+}
+
+#calendar > div.react-calendar > div.react-calendar__viewContainer > div > div > div > div.react-calendar__month-view__days > button {
+  height: 7vh;
+}
+
+#calendar > div.react-calendar > div.react-calendar__viewContainer > div > div > button {
+  height: 7vh;
+}
+
+#calendar > div.react-calendar > div.react-calendar__navigation {
+  justify-self: center;
+  margin-bottom: 1vh;
+
+}
+
+#day-display {
+  justify-items: center;
+}
