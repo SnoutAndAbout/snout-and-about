@@ -21,8 +21,8 @@ const Post =()=>{
       },
       body:JSON.stringify({"date":date,"name":name, "description":description, "location":location, "picture":picture})
     })
-    console.log(response)
     const result=await response.json()
+
     console.log(result)
 
     setDate(Date.now());
@@ -34,11 +34,7 @@ const Post =()=>{
     setTimeout(() => {
       setFormSubmit(false);
     }, 10000);
-   
-  
 
-
-    
   }
 
   return (

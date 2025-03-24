@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom"
 const Event = () => {
   let { eventId } = useParams();
   const [ event, setEvent] = useState({});
-  const [ cityName , setCityName ] = useState({})
+  const [ cityName , setCityName ] = useState({});
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const getEvent = async(id) => {
@@ -19,6 +20,21 @@ const Event = () => {
     getEvent(eventId);
   },[eventId])
 
+
+  const book = async() => {
+    try {
+      const response = await fetch(`https://snout-and-about.onrender.com/api/calendar`,{
+        method:"PUT",
+        headers:{
+          "Content-Type":"application/json",
+          "token": token
+        },
+        body:JSON.stringify({"eventId": event.id})
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -35,6 +51,7 @@ const Event = () => {
           <></>
         }
         <p>{event.description}</p>
+        {token ? <button onClick={book}>Add to your calendar!</button>:<></>}
       </div>
       :
       <p>Loading event details...</p>
