@@ -19,9 +19,7 @@ const Post =()=>{
       },
       body:JSON.stringify({"date":date,"name":name, "description":description, "location":location, "picture":picture})
     })
-    console.log(response)
     const result=await response.json()
-    console.log(result)
   }
 
   return (
