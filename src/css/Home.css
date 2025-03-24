@@ -15,14 +15,15 @@ body {
 .home-container {
   width: 90%;
   max-width: 800px;
+  border: 2px solid #ff9d00;
   /* background: rgba(255, 255, 255, 0.9);  */
   padding: 30px;
   border-radius: 15px;
   text-align: center;
   /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); */
-  background: rgba(39, 11, 11, 0.1);
-  backdrop-filter: blur(13px);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  background: rgba(255, 254, 254, 0.751);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.178);
   margin-top: 100px;
   margin-bottom: 50px;
 }
@@ -70,7 +71,7 @@ body {
   font-weight: bold;
   font-size: 18px;
   transition: color 0.3s ease;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .city-list a:hover {
@@ -347,15 +348,16 @@ img {
 }
 
 #event > p{
+  border: 2px solid #ff9d00;
   justify-self: center;
   align-self: center;
   /* background-color: antiquewhite; */
-  border: solid #222 1px;
   /* box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); */
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
   font-size: large;
+  color: white;
 }
 
 #post-form{
@@ -366,3 +368,18 @@ img {
   backdrop-filter: blur(10px);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
+
+div > h2 { 
+  color: white;
+  -webkit-text-stroke: 2px black;
+  font-size: 2.5rem; /* Adjust size as needed */
+  font-weight: bold;
+}
+
+div > h1 { 
+  color: white;
+  -webkit-text-stroke: 2px black;
+  font-size: 2.5rem; /* Adjust size as needed */
+  font-weight: bold;
+}
+

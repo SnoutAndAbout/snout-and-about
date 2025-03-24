@@ -50,7 +50,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div class="home">
       <h2>Register New User</h2>
        <div className="registration">
                 <Registration/>
