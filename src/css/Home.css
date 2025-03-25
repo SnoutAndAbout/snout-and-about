@@ -336,8 +336,7 @@ button:hover {
 }
 
 img {
-  width: 500px;
-  height: 500px;
+  height: 40vh;
   justify-self: center;
   align-self: center;
   margin-left: 125px;
